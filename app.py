@@ -8,8 +8,6 @@ app.secret_key = "your-secret-key-here"
 
 m = messenger()
 
-ip_storage = read_from_file("ips.j")
-
 def process_messages(messages):
     lst = []
     for msg in messages[::-1]:
