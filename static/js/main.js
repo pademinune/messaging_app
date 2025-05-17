@@ -2,7 +2,7 @@
 
 function message_div(msg) {
     let msgDiv = document.createElement('div');
-    msgDiv.innerHTML = `From <b>${msg.senderName} (${msg.senderId})</b> to <b>${msg.receiverName} (${msg.receiverId})</b> <br> ${msg.text}`;
+    msgDiv.innerHTML = `From <b>${msg.senderName} (${msg.senderId})</b> to <b>${msg.receiverName} (${msg.receiverId})</b> &emsp; &emsp; ${msg.timestamp} <br> ${msg.text}`;
     msgDiv.classList.add("message");
     return msgDiv;
 }
