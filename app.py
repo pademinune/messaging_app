@@ -2,7 +2,6 @@ from flask import Flask, request, render_template, session, redirect, url_for
 
 from messaging import messenger, message, user
 
-from file_storage import read_from_file, write_to_file
 
 app = Flask(__name__)
 app.secret_key = "your-secret-key-here"
@@ -170,19 +169,6 @@ def user_json():
 @app.route("/api/users")
 def get_users_json():
     return m.user_dict()
-
-@app.route("/ip")
-def ip():
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-    id = session.get("user_id")
-    if id == None:
-        print(f"USER IP IS {ip} and hasnt logged in yet")
-    else:
-        u = m.get_user(id)
-        print(f"USER NAMED {u.get_username()} IP IS {ip} and ID IS {id}")
-        ip_storage[u.get_username()] = ip
-        write_to_file(ip_storage, "ips.j")
-    return redirect("/home")
 
 if __name__ == '__main__':
     # app.run(debug=True)
