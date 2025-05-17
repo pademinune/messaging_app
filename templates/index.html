@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>Log into your account or create a new account</h1>
+  <a href="/about">About</a>
+  <!-- <form action="/submit" method="post">
+    <label for="input">Your username:</label>
+    <input type="text" id="input" name="userName" required>
+    <br>
+    <label for="numinp">Your age:</label>
+    <input type="number" id="numinp" name="userAge" required>
+    <button type="submit">Send</button>
+  </form> -->
+  <form action="/login" method="post">
+    <label for="username">Your username:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Your password:</label>
+    <input type="text" id="password" name="password" required>
+    <button type="submit">Log in</button>
+  </form>
+  <!-- <div>Registered Users:</div>
+  {% for usr in users %}
+    <div class = "message">
+        <strong>{{ usr.get_username() }} ({{ usr.get_id() }})</strong><br>
+    </div>
+  {% endfor %} -->
+  <!-- <button onclick="toggle('thing')">show the hidden text</button>
+  <div id = "thing">hello</div> -->
+  <button onclick="toggle('user_list')">Toggle User List</button>
+  <div id = "user_list"></div>
+  <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+  <script src = "{{ url_for('static', filename='js/api.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script>
+    display_main_list();
+    setInterval(display_main_list, 5000);
+  </script>
+</body>
+</html>

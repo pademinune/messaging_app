@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Private chat</title>
+        <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <!-- <div id = "message_list"></div> -->
+        <button onclick = "goBack()">Go back</button>
+        <form action="/send_message" method="post">
+            <label for="username">To:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="message">Message:</label>
+            <!-- <input type="text" id="message" name="message" required> -->
+            <br>
+            <textarea id = "message" name="message" style="
+              width: 50%;
+              height: 100px;
+              padding: 10px;
+              font-size: 16px;
+              font-family: sans-serif;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              resize: vertical;"></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <h2>Receieved</h2>
+        <div id = "received"></div>
+        <h2>Sent</h2>
+        <div id = "sent"></div>
+
+        
+
+        <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+        <script src = "{{ url_for('static', filename='js/api.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/display_chat.js') }}"></script>
+        <script>
+            // let pathParts = window.location.pathname.split('/');
+            // let userId = pathParts[pathParts.length - 1];
+            async function load() {
+                let msgs = await get_sent_messages_to(userId);
+                console.log(msgs)
+                display_message_list(msgs, "sent");
+            }
+            async function load2() {
+                let msgs2 = await get_received_messages_from(userId);
+                console.log(msgs2)
+                display_message_list(msgs2, "received");
+            }
+            load();
+            load2();
+            setInterval(load, 1000);
+            setInterval(load2, 1000);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{username}}'s Account</title>
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <h1>{{ username }}'s account</h1>
+    <p>Password: {{ password }}</p>
+    <hr>
+    <a href = "/about">About</a>
+    <form action="/send_message" method="post">
+    <label for="username">To:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="message">Message:</label>
+    <!-- <input type="text" id="message" name="message" required> -->
+    <br>
+    <textarea id = "message" name="message" style="
+      width: 50%;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      font-family: sans-serif;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;"></textarea>
+    <button type="submit">Send</button>
+    </form>
+    <a href = "/logout"><button>Logout</button></a>
+
+    <!-- <a href = "/user_page/user_list"><button>User list</button></a> -->
+    <button onclick="toggle('user_list')">View User List</button>
+    <div id = "user_list"></div>
+    <br>
+    <p>Received Messages:</p>
+    <div id = "received"></div>
+    <!-- {% for msg in messages %}
+      <div class = "message">
+        <strong>From {{ msg["sender"] }} ({{ msg["sender_id"] }}):</strong><br>
+        {{ msg["text"] }}
+      </div>
+    {% endfor %} -->
+
+    <p>Sent Messages:</p>
+    <div id="sent"></div>
+    <!-- {% for msg in sent_messages %}
+      <div class = "message">
+        <strong>Sent to {{ msg["receiver"] }} ({{ msg["receiver_id"] }}):</strong><br>
+        {{ msg["text"] }}
+      </div>
+    {% endfor %} -->
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src = "{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src = "{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+      display_main_list();
+      display_received_message_list("received");
+      display_sent_message_list("sent");
+      setInterval(display_main_list, 5000);
+      setInterval(async function (){display_received_message_list("received")}, 3000)
+      setInterval(async function (){display_sent_message_list("sent")}, 3000)
+    </script>
+  </body>
+</html>

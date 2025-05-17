@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>About this website</title>
+  <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  This is a test of a new message encryption method. It very secure!
+  <a href="/home">Go to login</a>
+  <br>
+  Help me help me help me help me
+  <br>
+  <img src="/static/images/bill.png">
+  <button onclick="goBack()">
+    move
+  </button>
+  <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+  <script src = "{{ url_for('static', filename='js/api.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
