@@ -27,6 +27,12 @@ def get_messages_between_users(sender_id, receiver_id):
         c.execute("SELECT * FROM messages WHERE sender_id = ? AND receiver_id = ?", (sender_id, receiver_id))
         return c.fetchall()
 
+def get_all_related_messages(user_id, other_id):
+    with sqlite3.connect("chat.db") as conn:
+        c = conn.cursor()
+        c.execute("SELECT * FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (receiver_id = ? AND sender_id = ?) ORDER BY id DESC", (user_id, other_id, user_id, other_id))
+        return c.fetchall()
+
 def get_all_messages():
     with sqlite3.connect("chat.db") as conn:
         c = conn.cursor()
@@ -92,5 +98,12 @@ if __name__ == "__main__":
     # print(get_user_by_username("admin3"))
 
     # print(get_all_users())
+    # with sqlite3.connect("chat.db") as conn:
+    #     c = conn.cursor()
+    #     c.execute("SELECT * FROM users")
+    #     print(c.fetchall())
+
+    print(get_all_related_messages(1, 4))
+
     pass
 

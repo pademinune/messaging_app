@@ -27,10 +27,12 @@
               resize: vertical;"></textarea>
             <button type="submit">Send</button>
         </form>
-        <h2>Receieved</h2>
+        <!-- <h2>Receieved</h2>
         <div id = "received"></div>
         <h2>Sent</h2>
-        <div id = "sent"></div>
+        <div id = "sent"></div> -->
+        <h2>Messages</h2>
+        <div id="messages"></div>
 
         
 
@@ -54,10 +56,17 @@
                 // console.log(msgs2)
                 display_message_list(msgs2, "received");
             }
-            load();
-            load2();
-            setInterval(load, 1000);
-            setInterval(load2, 1000);
+            async function load3() {
+                let msgs3 = await get_similar_messages(userId);
+                // console.log(msgs2)
+                display_message_list(msgs3, "messages");
+            }
+            load3();
+            // load();
+            // load2();
+            // setInterval(load, 1000);
+            // setInterval(load2, 1000);
+            setInterval(load3, 1000);
         </script>
     </body>
 </html>

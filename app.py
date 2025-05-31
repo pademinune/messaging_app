@@ -63,7 +63,7 @@ def login():
     # id = database.get_user_by_username(username)
     if not database.user_exists(username=username):
         u = database.add_user(username, password)
-        session["user_id"] = database.get_user_id_by_username(username)
+        session["user_id"] = database.get_id_by_username(username)
         return redirect("/user_page")
     else:
         u = database.get_user_by_username(username)
@@ -183,6 +183,12 @@ def get_received_json(fromId):
     return message_dicts
     # usr = m.get_user(session["user_id"])
     # return usr.messages_by_sender_id_dict(int(fromId))
+
+@app.route("/api/related_messages/<toId>")
+def get_related_messages(toId):
+    usr_id = session.get("user_id")
+    return [message_dict(msg) for msg in database.get_all_related_messages(usr_id, toId)]
+    # return usr.sent_messages_by_receiver_id_dict(int(toId))
 
 # @app.route("/user_json")
 # def user_json():

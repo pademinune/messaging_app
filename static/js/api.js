@@ -82,3 +82,15 @@ async function get_sent_messages_to(receiver_id) {
       return [];
     }
 }
+
+async function get_similar_messages(other_id) {
+  try {
+    const response = await fetch(`/api/related_messages/${other_id}`);
+    const data = await response.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+}
